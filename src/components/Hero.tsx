@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+
 import TextRotator from './TextRotator';
+import ConsultationModal from './ConsultationModal';
 
 /* ──────────────────────────────────
    Types
@@ -28,6 +29,7 @@ export default function Hero() {
   const blendRef = useRef(0);
   const rafRef = useRef<number>(0);
   const startRef = useRef<number>(0);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -399,12 +401,12 @@ export default function Hero() {
           togetherness, hospitality, and the spirit of home.
         </p>
         <div className="hero-buttons">
-          <Link href="https://camelcaravan.co/shop/" className="btn-primary">
+          <button className="btn-primary" onClick={() => setModalOpen(true)}>
+            Start Your Journey ✦
+          </button>
+          <button className="btn-secondary" onClick={() => document.querySelector('.products')?.scrollIntoView({ behavior: 'smooth' })}>
             Explore Collection →
-          </Link>
-          <Link href="https://camelcaravan.co/about-us/" className="btn-secondary">
-            Our Story
-          </Link>
+          </button>
         </div>
       </div>
 
@@ -412,6 +414,8 @@ export default function Hero() {
         <span>Scroll</span>
         <div className="scroll-line" />
       </div>
+
+      <ConsultationModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );
 }

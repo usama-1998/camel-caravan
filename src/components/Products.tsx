@@ -1,6 +1,10 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import TextRotator from './TextRotator';
+import ConsultationModal from './ConsultationModal';
 
 const products = [
   {
@@ -36,6 +40,8 @@ const products = [
 ];
 
 export default function Products() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <section className="products">
       <div className="products-header">
@@ -77,6 +83,14 @@ export default function Products() {
           </Link>
         </div>
       </div>
+
+      <div className="section-cta-wrap reveal">
+        <button className="btn-section-cta" onClick={() => setModalOpen(true)}>
+          ✦ Get a Custom Quote
+        </button>
+      </div>
+
+      <ConsultationModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );
 }

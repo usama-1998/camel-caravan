@@ -1,6 +1,11 @@
-import TextRotator from './TextRotator';
+'use client';
+
+import { useState } from 'react';
+import ConsultationModal from './ConsultationModal';
 
 export default function Craftsmanship() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   const steps = [
     {
       num: '01',
@@ -22,9 +27,10 @@ export default function Craftsmanship() {
   return (
     <section className="craftsmanship">
       <div className="craft-header">
+        <div className="crescent-top-left" />
         <span className="section-label reveal">How We Work</span>
         <h2 className="reveal">
-          From your <TextRotator words={['vision', 'dream', 'idea']} color="var(--desert-gold)" /> to a finished piece
+          From your vision to a finished piece
         </h2>
       </div>
 
@@ -32,23 +38,32 @@ export default function Craftsmanship() {
         {/* The Golden Path */}
         <div className="timeline-path" />
 
-        {steps.map((step, i) => (
-          <div key={step.num} className={`timeline-item reveal ${i > 0 ? `reveal-delay-${i}` : ''}`}>
-            {/* The Node */}
-            <div className="timeline-node">
-              <div className="timeline-node-inner" />
-            </div>
+        <div className="timeline-items">
+          {steps.map((step, i) => (
+            <div key={step.num} className={`timeline-item reveal ${i > 0 ? `reveal-delay-${i}` : ''}`}>
+              {/* The Node */}
+              <div className="timeline-node">
+                <div className="timeline-node-inner" />
+              </div>
 
-            {/* The Content */}
-            <div className="timeline-content">
-              <span className="timeline-step-num">{step.num}</span>
-              <h3>{step.title}</h3>
-              <p>{step.desc}</p>
+              {/* The Content */}
+              <div className="timeline-content">
+                <span className="timeline-step-num">{step.num}</span>
+                <h3>{step.title}</h3>
+                <p>{step.desc}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
+
+      <div className="section-cta-wrap reveal">
+        <button className="btn-section-cta btn-section-cta--light" onClick={() => setModalOpen(true)}>
+          ✦ Start Your Journey
+        </button>
+      </div>
+
+      <ConsultationModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );
 }
-

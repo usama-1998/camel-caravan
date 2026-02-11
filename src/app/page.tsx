@@ -9,6 +9,7 @@ import Craftsmanship from '@/components/Craftsmanship';
 import Testimonials from '@/components/Testimonials';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
+import ContactWidget from '@/components/ContactWidget';
 
 export default function Home() {
   useScrollReveal();
@@ -23,6 +24,7 @@ export default function Home() {
       <Testimonials />
       <CTA />
       <Footer />
+      <ContactWidget />
     </>
   );
 }

@@ -1,52 +1,13 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useState } from 'react';
+import ConsultationModal from './ConsultationModal';
 
 export default function Philosophy() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    // Animate counters when in view
-    const counters = section.querySelectorAll('.counter-num');
-    let animated = false;
-
-    function animateCounters() {
-      if (animated) return;
-      animated = true;
-      counters.forEach((el) => {
-        const target = parseInt(el.getAttribute('data-target') || '0', 10);
-        let current = 0;
-        const increment = Math.ceil(target / 60);
-        const suffix = el.getAttribute('data-suffix') || '';
-        const timer = setInterval(() => {
-          current += increment;
-          if (current >= target) {
-            current = target;
-            clearInterval(timer);
-          }
-          el.textContent = current + suffix;
-        }, 30);
-      });
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) animateCounters();
-        });
-      },
-      { threshold: 0.3 }
-    );
-    observer.observe(section);
-
-    return () => observer.disconnect();
-  }, []);
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <section className="philosophy" ref={sectionRef}>
+    <section className="philosophy">
       {/* Decorative arch background */}
       <div className="philosophy-arch">
         <svg viewBox="0 0 600 700" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -94,34 +55,14 @@ export default function Philosophy() {
           </p>
         </div>
 
-        {/* Counters row */}
-        <div className="philosophy-counters reveal">
-          <div className="counter-item">
-            <span className="counter-num" data-target="500" data-suffix="+">0</span>
-            <span className="counter-label">Families Served</span>
-          </div>
-          <div className="counter-divider" />
-          <div className="counter-item">
-            <span className="counter-num" data-target="8" data-suffix=" Years">0</span>
-            <span className="counter-label">Of Craftsmanship</span>
-          </div>
-          <div className="counter-divider" />
-          <div className="counter-item">
-            <span className="counter-num" data-target="100" data-suffix="%">0</span>
-            <span className="counter-label">Handcrafted</span>
-          </div>
-        </div>
-
-        {/* Value badges */}
-        <div className="philosophy-values reveal">
-          {['Heritage', 'Family', 'Craftsmanship', 'Intention'].map((val) => (
-            <div key={val} className="value-badge">
-              <span className="value-icon">✦</span>
-              <span>{val}</span>
-            </div>
-          ))}
+        <div className="section-cta-wrap reveal">
+          <button className="btn-section-cta" onClick={() => setModalOpen(true)}>
+            ✦ Start Your Journey
+          </button>
         </div>
       </div>
+
+      <ConsultationModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );
 }
