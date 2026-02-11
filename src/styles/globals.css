@@ -1672,6 +1672,20 @@ footer::before {
 
 }
 
+@media (max-width: 768px) {
+  .craftsmanship::before {
+    background-image:
+      radial-gradient(1.5px 1.5px at 20% 30%, rgba(198, 153, 62, 0.5) 1px, transparent 0),
+      radial-gradient(2px 2px at 40% 70%, rgba(198, 153, 62, 0.6) 1px, transparent 0),
+      radial-gradient(1.5px 1.5px at 60% 20%, rgba(198, 153, 62, 0.5) 1px, transparent 0),
+      radial-gradient(2px 2px at 80% 60%, rgba(198, 153, 62, 0.7) 1px, transparent 0),
+      radial-gradient(1px 1px at 50% 50%, rgba(253, 248, 240, 0.3) 1px, transparent 0);
+    background-size: 200px 200px;
+    will-change: transform;
+    /* Hint to browser for faster painting */
+  }
+}
+
 
 
 .craftsmanship-canvas {
