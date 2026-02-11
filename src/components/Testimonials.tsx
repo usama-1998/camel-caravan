@@ -2,52 +2,59 @@ const testimonials = [
   {
     quote:
       "The majlis transformed our living room into the heart of our home. Our kids now sit with us every evening — it's become our favorite space.",
-    name: 'Nurhaida & Family',
-    detail: 'Majlis Sofa — Woodlands, SG',
-    initial: 'N',
-  },
-  {
-    quote:
-      'The mashrabiya panels added such a beautiful touch to our home. Guests always ask about them — true conversation starters that carry meaning.',
-    name: 'Ahmad R.',
-    detail: 'Mashrabiya Wall Feature — Tampines, SG',
-    initial: 'A',
-  },
-  {
-    quote:
-      'Having a mihrab corner gave our family a dedicated space for prayer. The craftsmanship is impeccable — you can feel the care in every detail.',
-    name: 'Sarah & Imran',
-    detail: 'Mihrab — Pasir Ris, SG',
-    initial: 'S',
-  },
-];
+    import TextRotator from './TextRotator';
 
-import TextRotator from './TextRotator';
+    const reviews = [
+      {
+        text: "The majlis seating completely transformed our living room. It’s not just furniture; it’s a gathering place for our soul.",
+        author: "Zarah M.",
+      },
+      {
+        text: "I was looking for something that honored my heritage but felt modern. Camel Caravan nailed it beautifully.",
+        author: "Tariq A.",
+      },
+      {
+        text: "The craftsmanship is undeniable. You can feel the hands that made this. Worth every dinar.",
+        author: "Layla S.",
+      },
+      {
+        text: "A perfect blend of comfort and tradition. Our guests always ask where we got our furnishings.",
+        author: "Omar K.",
+      },
+      {
+        text: "From the initial design to the final installation, the team was professional and passionate. A dream come true.",
+        author: "Fatima R.",
+      },
+      {
+        text: "The golden details and fabric quality are unmatched. It feels like a piece of art in our home.",
+        author: "Hassan B.",
+      },
+    ];
 
-export default function Testimonials() {
-  return (
-    <section className="testimonials">
+    // Duplicate reviews to ensure seamless scrolling
+    const allReviews = [...reviews, ...reviews, ...reviews];
+
+    export default function Testimonials() {
+    return(
+    <section className = "testimonials" id = "testimonials" >
       <div className="testimonials-header reveal">
         <h2>
-          Words from our <TextRotator words={['family', 'community', 'clients']} color="var(--caravan-brown)" />
+          Words from our <TextRotator words={['family', 'community', 'clients']} color="var(--desert-gold)" />
         </h2>
       </div>
 
-      <div className="postcard-wall">
-        {testimonials.map((t, i) => (
-          <div key={t.name} className={`postcard reveal ${i > 0 ? `reveal-delay-${i}` : ''}`}>
-            <div className="postcard-stars">★ ★ ★ ★ ★</div>
-            <p className="postcard-quote">&ldquo;{t.quote}&rdquo;</p>
-            <div className="postcard-author">
-              <div className="author-avatar">{t.initial}</div>
-              <div className="author-info">
-                <span>{t.name}</span>
-                <small>{t.detail}</small>
-              </div>
+      <div className="marquee-container">
+        <div className="marquee-track">
+          {allReviews.map((review, index) => (
+            <div key={index} className="review-card">
+              <div className="stars">★★★★★</div>
+              <p className="review-quote">"{review.text}"</p>
+              <span className="review-author">— {review.author}</span>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </section>
+    </section >
   );
 }
+```
