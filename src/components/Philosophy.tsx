@@ -52,28 +52,28 @@ export default function Philosophy() {
         <svg viewBox="0 0 600 700" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M100 700 L100 280 Q100 100 300 100 Q500 100 500 280 L500 700"
-            stroke="rgba(198,153,62,0.12)"
+            stroke="rgba(198,153,62,0.4)"
             strokeWidth="1.5"
             fill="none"
           />
           <path
             d="M130 700 L130 300 Q130 130 300 130 Q470 130 470 300 L470 700"
-            stroke="rgba(198,153,62,0.08)"
+            stroke="rgba(198,153,62,0.25)"
             strokeWidth="1"
             fill="none"
           />
           <path
             d="M160 700 L160 320 Q160 160 300 160 Q440 160 440 320 L440 700"
-            stroke="rgba(198,153,62,0.05)"
+            stroke="rgba(198,153,62,0.15)"
             strokeWidth="0.8"
             fill="none"
           />
           {/* Keystone ornament */}
-          <circle cx="300" cy="100" r="6" fill="rgba(198,153,62,0.15)" />
-          <circle cx="300" cy="100" r="12" stroke="rgba(198,153,62,0.1)" strokeWidth="0.5" fill="none" />
+          <circle cx="300" cy="100" r="6" fill="rgba(198,153,62,0.4)" />
+          <circle cx="300" cy="100" r="12" stroke="rgba(198,153,62,0.3)" strokeWidth="0.5" fill="none" />
           {/* Side ornaments */}
-          <circle cx="100" cy="400" r="4" fill="rgba(198,153,62,0.1)" />
-          <circle cx="500" cy="400" r="4" fill="rgba(198,153,62,0.1)" />
+          <circle cx="100" cy="400" r="4" fill="rgba(198,153,62,0.3)" />
+          <circle cx="500" cy="400" r="4" fill="rgba(198,153,62,0.3)" />
         </svg>
       </div>
 

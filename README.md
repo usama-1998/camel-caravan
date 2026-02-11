@@ -33,7 +33,7 @@ Open [http://localhost:3000](http://localhost:3000) to view.
 | Section | Description |
 |---------|-------------|
 | **Hero** | Interactive Islamic geometric pattern with autonomous glow |
-| **Philosophy** | Brand mission and values |
+| **Philosophy** | Brand mission and values (**Redesigned Light Theme**) |
 | **Products** | Featured handcrafted furnishings |
 | **Craftsmanship** | Process and artistry details |
 | **Testimonials** | Customer stories |

@@ -7,11 +7,14 @@ export default function CTA() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useCanvasAnimation(canvasRef, {
-    particleCount: 40,
+    particleCount: 120, // Increased for starry night effect
     baseAlpha: 0.1,
     glowAlpha: 0.5,
     glowRadius: 180,
-    starColor: '198,153,62' // Gold
+    starColor: '198,153,62', // Gold
+    enablePatterns: false, // Optimization: remove heavy geometric patterns
+    enableInteraction: false, // User request: remove mouse interaction
+    spawnDirection: 'both' // User request: particles from top and bottom
   });
 
   return (
@@ -20,7 +23,7 @@ export default function CTA() {
 
       {/* Remove old decorative elements as they are now in canvas or not needed */}
       {/* <div className="stars" ref={starsRef} /> */}
-      {/* <div className="crescent" /> */}
+      <div className="crescent" />
 
       <div className="cta-content reveal">
         <h2>

@@ -19,6 +19,9 @@ export const useCanvasAnimation = (
         glowAlpha?: number;
         glowRadius?: number;
         starColor?: string;
+        enablePatterns?: boolean;
+        enableInteraction?: boolean;
+        spawnDirection?: 'top' | 'bottom' | 'both';
     } = {}
 ) => {
     const mouseRef = useRef({ x: -9999, y: -9999 });
@@ -82,15 +85,29 @@ export const useCanvasAnimation = (
         const BASE_ALPHA = options.baseAlpha || 0.13;
         const GLOW_ALPHA = options.glowAlpha || 0.72;
         const STAR_COLOR = options.starColor || '198,153,62';
+        const ENABLE_PATTERNS = options.enablePatterns ?? true;
+        const ENABLE_INTERACTION = options.enableInteraction ?? true;
+        const SPAWN_DIR = options.spawnDirection || 'bottom';
 
         /* ── Particles ── */
         const particles: Particle[] = [];
-        function spawnParticle(): Particle {
+        function spawnParticle(initial: boolean = false): Particle {
+            let startY;
+            if (initial) {
+                startY = Math.random() * H;
+            } else {
+                if (SPAWN_DIR === 'top') startY = -20;
+                else if (SPAWN_DIR === 'bottom') startY = H + 20;
+                else startY = Math.random() > 0.5 ? -20 : H + 20;
+            }
+
             return {
-                x: Math.random() * 4000 - 500,
-                y: Math.random() * 3000 - 200,
+                x: Math.random() * W,
+                y: startY,
                 vx: (Math.random() - 0.5) * 0.25,
-                vy: -0.15 - Math.random() * 0.35,
+                vy: (SPAWN_DIR === 'top' || (SPAWN_DIR === 'both' && startY < 0))
+                    ? 0.15 + Math.random() * 0.35 // falling down
+                    : -0.15 - Math.random() * 0.35, // rising up
                 size: 0.8 + Math.random() * 1.6,
                 baseOpacity: 0.15 + Math.random() * 0.3,
                 life: Math.random() * 400,
@@ -98,7 +115,7 @@ export const useCanvasAnimation = (
             };
         }
         const pCount = options.particleCount || 50;
-        for (let i = 0; i < pCount; i++) particles.push(spawnParticle());
+        for (let i = 0; i < pCount; i++) particles.push(spawnParticle(true));
 
         /* ── Drawing helpers ── */
 
@@ -222,7 +239,7 @@ export const useCanvasAnimation = (
             const autoY = H * 0.5 + Math.cos(elapsed * sp * 0.7 + 0.5) * H * 0.28 + Math.cos(elapsed * sp * 2.1 + 2.0) * H * 0.06;
 
             // Smooth blend: 0 = autonomous, 1 = real mouse
-            const target = realMouseActiveRef.current ? 1 : 0;
+            const target = (ENABLE_INTERACTION && realMouseActiveRef.current) ? 1 : 0;
             blendRef.current += (target - blendRef.current) * 0.035;
             const b = blendRef.current;
 
@@ -238,83 +255,85 @@ export const useCanvasAnimation = (
             const maxD = Math.sqrt(W * W + H * H) * 0.5;
 
             /* ── Layer 1: Primary star pattern ── */
-            const cols = Math.ceil(W / TILE) + 3;
-            const rows = Math.ceil(H / TILE) + 3;
-            const startX = -TILE;
-            const startY = -TILE;
-            const parX1 = (mx - W / 2) * 0.012;
-            const parY1 = (my - H / 2) * 0.012;
+            if (ENABLE_PATTERNS) {
+                const cols = Math.ceil(W / TILE) + 3;
+                const rows = Math.ceil(H / TILE) + 3;
+                const startX = -TILE;
+                const startY = -TILE;
+                const parX1 = (mx - W / 2) * 0.012;
+                const parY1 = (my - H / 2) * 0.012;
 
-            ctx!.lineCap = 'round';
-            ctx!.lineJoin = 'round';
+                ctx!.lineCap = 'round';
+                ctx!.lineJoin = 'round';
 
-            const outerR = TILE * 0.38;
-            const innerR = TILE * 0.18;
+                const outerR = TILE * 0.38;
+                const innerR = TILE * 0.18;
 
-            for (let c = 0; c < cols; c++) {
-                for (let r = 0; r < rows; r++) {
-                    const cx = startX + c * TILE + TILE / 2 + parX1;
-                    const cy = startY + r * TILE + TILE / 2 + parY1;
+                for (let c = 0; c < cols; c++) {
+                    for (let r = 0; r < rows; r++) {
+                        const cx = startX + c * TILE + TILE / 2 + parX1;
+                        const cy = startY + r * TILE + TILE / 2 + parY1;
 
-                    const dCenter = Math.sqrt((cx - W / 2) ** 2 + (cy - H / 2) ** 2);
-                    const delay = dCenter / maxD;
-                    const prog = Math.max(0, Math.min(1, (entrance - delay * 0.55) / 0.45));
-                    if (prog <= 0) continue;
+                        const dCenter = Math.sqrt((cx - W / 2) ** 2 + (cy - H / 2) ** 2);
+                        const delay = dCenter / maxD;
+                        const prog = Math.max(0, Math.min(1, (entrance - delay * 0.55) / 0.45));
+                        if (prog <= 0) continue;
 
-                    const dMouse = Math.sqrt((cx - mx) ** 2 + (cy - my) ** 2);
-                    const glow = Math.max(0, 1 - dMouse / GLOW_R);
-                    const glowQ = glow * glow;
-                    const pulse = Math.sin(elapsed * 0.6 + cx * 0.008 + cy * 0.01) * 0.025;
-                    const alpha = Math.min(1, (BASE_ALPHA + glowQ * GLOW_ALPHA + pulse) * prog);
-                    const lw = 0.7 + glowQ * 1.4;
+                        const dMouse = Math.sqrt((cx - mx) ** 2 + (cy - my) ** 2);
+                        const glow = Math.max(0, 1 - dMouse / GLOW_R);
+                        const glowQ = glow * glow;
+                        const pulse = Math.sin(elapsed * 0.6 + cx * 0.008 + cy * 0.01) * 0.025;
+                        const alpha = Math.min(1, (BASE_ALPHA + glowQ * GLOW_ALPHA + pulse) * prog);
+                        const lw = 0.7 + glowQ * 1.4;
 
-                    drawStar(cx, cy, outerR, innerR, alpha, lw);
-                    drawRosette(cx, cy, innerR * 0.55, alpha * 0.45, lw * 0.5);
-                    drawBridges(cx, cy, outerR, alpha, lw, TILE);
-                    drawRadials(cx, cy, innerR, outerR, alpha, lw);
+                        drawStar(cx, cy, outerR, innerR, alpha, lw);
+                        drawRosette(cx, cy, innerR * 0.55, alpha * 0.45, lw * 0.5);
+                        drawBridges(cx, cy, outerR, alpha, lw, TILE);
+                        drawRadials(cx, cy, innerR, outerR, alpha, lw);
 
-                    if (c > 0 && r > 0) {
-                        const sx = startX + c * TILE + parX1;
-                        const sy = startY + r * TILE + parY1;
-                        const dMouse2 = Math.sqrt((sx - mx) ** 2 + (sy - my) ** 2);
-                        const glow2 = Math.max(0, 1 - dMouse2 / GLOW_R);
-                        const alpha2 = Math.min(1, (BASE_ALPHA + glow2 * glow2 * GLOW_ALPHA + pulse) * prog);
-                        drawSecondaryPattern(sx, sy, TILE, alpha2, lw);
-                    }
+                        if (c > 0 && r > 0) {
+                            const sx = startX + c * TILE + parX1;
+                            const sy = startY + r * TILE + parY1;
+                            const dMouse2 = Math.sqrt((sx - mx) ** 2 + (sy - my) ** 2);
+                            const glow2 = Math.max(0, 1 - dMouse2 / GLOW_R);
+                            const alpha2 = Math.min(1, (BASE_ALPHA + glow2 * glow2 * GLOW_ALPHA + pulse) * prog);
+                            drawSecondaryPattern(sx, sy, TILE, alpha2, lw);
+                        }
 
-                    if (glowQ > 0.15) {
-                        ctx!.strokeStyle = `rgba(${STAR_COLOR},${glowQ * 0.12 * prog})`;
-                        ctx!.lineWidth = 0.5;
-                        ctx!.beginPath();
-                        ctx!.arc(cx, cy, outerR * 1.15, 0, Math.PI * 2);
-                        ctx!.stroke();
+                        if (glowQ > 0.15) {
+                            ctx!.strokeStyle = `rgba(${STAR_COLOR},${glowQ * 0.12 * prog})`;
+                            ctx!.lineWidth = 0.5;
+                            ctx!.beginPath();
+                            ctx!.arc(cx, cy, outerR * 1.15, 0, Math.PI * 2);
+                            ctx!.stroke();
+                        }
                     }
                 }
-            }
 
-            /* ── Layer 2: Finer overlay pattern ── */
-            const TILE2 = TILE * 0.42;
-            const outerR2 = TILE2 * 0.32;
-            const innerR2 = TILE2 * 0.14;
-            const parX2 = (mx - W / 2) * -0.006;
-            const parY2 = (my - H / 2) * -0.006;
-            const cols2 = Math.ceil(W / TILE2) + 4;
-            const rows2 = Math.ceil(H / TILE2) + 4;
+                /* ── Layer 2: Finer overlay pattern ── */
+                const TILE2 = TILE * 0.42;
+                const outerR2 = TILE2 * 0.32;
+                const innerR2 = TILE2 * 0.14;
+                const parX2 = (mx - W / 2) * -0.006;
+                const parY2 = (my - H / 2) * -0.006;
+                const cols2 = Math.ceil(W / TILE2) + 4;
+                const rows2 = Math.ceil(H / TILE2) + 4;
 
-            for (let c = 0; c < cols2; c++) {
-                for (let r = 0; r < rows2; r++) {
-                    const cx = -TILE2 + c * TILE2 + TILE2 / 2 + parX2;
-                    const cy = -TILE2 + r * TILE2 + TILE2 / 2 + parY2;
-                    const dCenter = Math.sqrt((cx - W / 2) ** 2 + (cy - H / 2) ** 2);
-                    const delay = dCenter / maxD;
-                    const prog = Math.max(0, Math.min(1, (entrance - delay * 0.6 - 0.15) / 0.4));
-                    if (prog <= 0) continue;
-                    const dMouse = Math.sqrt((cx - mx) ** 2 + (cy - my) ** 2);
-                    const glow = Math.max(0, 1 - dMouse / (GLOW_R * 0.7));
-                    const glowQ = glow * glow;
-                    const alpha = Math.min(1, (BASE_ALPHA * 0.35 + glowQ * GLOW_ALPHA * 0.35) * prog);
-                    const lw = 0.35 + glowQ * 0.5;
-                    drawStar(cx, cy, outerR2, innerR2, alpha, lw);
+                for (let c = 0; c < cols2; c++) {
+                    for (let r = 0; r < rows2; r++) {
+                        const cx = -TILE2 + c * TILE2 + TILE2 / 2 + parX2;
+                        const cy = -TILE2 + r * TILE2 + TILE2 / 2 + parY2;
+                        const dCenter = Math.sqrt((cx - W / 2) ** 2 + (cy - H / 2) ** 2);
+                        const delay = dCenter / maxD;
+                        const prog = Math.max(0, Math.min(1, (entrance - delay * 0.6 - 0.15) / 0.4));
+                        if (prog <= 0) continue;
+                        const dMouse = Math.sqrt((cx - mx) ** 2 + (cy - my) ** 2);
+                        const glow = Math.max(0, 1 - dMouse / (GLOW_R * 0.7));
+                        const glowQ = glow * glow;
+                        const alpha = Math.min(1, (BASE_ALPHA * 0.35 + glowQ * GLOW_ALPHA * 0.35) * prog);
+                        const lw = 0.35 + glowQ * 0.5;
+                        drawStar(cx, cy, outerR2, innerR2, alpha, lw);
+                    }
                 }
             }
 
@@ -333,8 +352,7 @@ export const useCanvasAnimation = (
                 p.life++;
                 if (p.life > p.maxLife || p.x < -80 || p.x > W + 80 || p.y < -80 || p.y > H + 80) {
                     Object.assign(p, spawnParticle());
-                    p.x = Math.random() * W;
-                    p.y = H + 20;
+                    // Keep life at 0 for new particles
                     p.life = 0;
                 }
                 const t = p.life / p.maxLife;
