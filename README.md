@@ -36,6 +36,7 @@ A premium landing page for **Camel Caravan**, a brand offering handcrafted furni
 - **Text Emphasis** — Key brand words italicized in gold serif for narrative depth.
 - **Enhanced UI** — Deeper shadow on sticky navbar for better content separation.
 - **Explore Collection** — Hero button scrolls smoothly to the products section.
+- **Headline Refinement** — Updated "How We Work" section title for better emotional resonance.
 - **Philosophy Simplified** — Clean text-focused layout without counters or value badges.
 
 ## Getting Started

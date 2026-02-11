@@ -30,7 +30,7 @@ export default function Craftsmanship() {
         <div className="crescent-top-left" />
         <span className="section-label reveal">How We Work</span>
         <h2 className="reveal">
-          From your vision to a finished <em>piece</em>
+          Bringing your <em>vision</em> to life
         </h2>
       </div>
 
