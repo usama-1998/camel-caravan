@@ -28,8 +28,8 @@ export default function Craftsmanship() {
     <section className="craftsmanship">
       <div className="craft-header">
         <div className="crescent-top-left" />
-        <span className="section-label reveal">How We Work</span>
-        <h2 className="reveal">
+        <span className="section-label">How We Work</span>
+        <h2>
           Bringing your <em>vision</em> to life
         </h2>
       </div>
@@ -40,7 +40,7 @@ export default function Craftsmanship() {
 
         <div className="timeline-items">
           {steps.map((step, i) => (
-            <div key={step.num} className={`timeline-item reveal ${i > 0 ? `reveal-delay-${i}` : ''}`}>
+            <div key={step.num} className="timeline-item">
               {/* The Node */}
               <div className="timeline-node">
                 <div className="timeline-node-inner" />
@@ -57,7 +57,7 @@ export default function Craftsmanship() {
         </div>
       </div>
 
-      <div className="section-cta-wrap reveal">
+      <div className="section-cta-wrap">
         <button className="btn-section-cta btn-section-cta--light" onClick={() => setModalOpen(true)}>
           ✦ Start Your Journey
         </button>
