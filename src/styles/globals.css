@@ -478,6 +478,12 @@ nav:not(.scrolled) .mobile-menu-btn span {
   margin-bottom: 0.4rem;
 }
 
+@media (max-width: 768px) {
+  .scroll-indicator {
+    display: none;
+  }
+}
+
 .counter-label {
   font-size: 0.72rem;
   letter-spacing: 0.18em;
