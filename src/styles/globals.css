@@ -1777,6 +1777,14 @@ footer::before {
   z-index: 1;
 }
 
+@media (max-width: 768px) {
+  .timeline-node {
+    box-shadow: none;
+    background: var(--desert-gold);
+    /* Ensure visibility without glow */
+  }
+}
+
 /* Fix Timeline Alignment */
 .timeline-item {
   display: grid;
@@ -1810,12 +1818,23 @@ footer::before {
 /* Reset margins from previous logic to avoid conflicts */
 .timeline-content {
   padding: 2.5rem;
-  background: rgba(26, 21, 32, 0.7);
+  background: rgba(26, 21, 32, 0.85);
+  /* Slightly more opaque since no blur */
   backdrop-filter: blur(12px);
   border: 1px solid rgba(198, 153, 62, 0.2);
   border-radius: 8px;
   position: relative;
   transition: all 0.5s ease;
+}
+
+@media (max-width: 768px) {
+  .timeline-content {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    background: rgba(26, 21, 32, 0.95);
+    /* Solid dark background */
+  }
 }
 
 .timeline-content:hover {
