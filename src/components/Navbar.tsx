@@ -31,22 +31,34 @@ export default function Navbar() {
 
       <ul className="nav-links">
         <li>
-          <Link href="https://camelcaravan.co/shop/">Shop</Link>
+          <Link href="#philosophy" onClick={(e) => {
+            e.preventDefault();
+            document.querySelector('.philosophy')?.scrollIntoView({ behavior: 'smooth' });
+          }}>Philosophy</Link>
         </li>
         <li>
-          <Link href="https://camelcaravan.co/about-us/">Our Story</Link>
+          <Link href="#craftsmanship" onClick={(e) => {
+            e.preventDefault();
+            document.querySelector('.craftsmanship')?.scrollIntoView({ behavior: 'smooth' });
+          }}>Process</Link>
         </li>
         <li>
-          <a
-            href="https://drive.google.com/file/d/1B_nU-ehyrK26i3ApYfodDAIXoZ_c_JXc/view"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Catalog
-          </a>
+          <Link href="#products" onClick={(e) => {
+            e.preventDefault();
+            document.querySelector('.products')?.scrollIntoView({ behavior: 'smooth' });
+          }}>Collection</Link>
         </li>
         <li>
-          <Link href="https://camelcaravan.co/contact-us/" className="nav-cta">
+          <Link href="#testimonials" onClick={(e) => {
+            e.preventDefault();
+            document.querySelector('.testimonials')?.scrollIntoView({ behavior: 'smooth' });
+          }}>Reviews</Link>
+        </li>
+        <li>
+          <Link href="#cta" className="nav-cta" onClick={(e) => {
+            e.preventDefault();
+            document.querySelector('.cta-section')?.scrollIntoView({ behavior: 'smooth' });
+          }}>
             Get in Touch
           </Link>
         </li>

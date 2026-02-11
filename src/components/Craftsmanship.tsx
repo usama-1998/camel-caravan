@@ -1,3 +1,5 @@
+import TextRotator from './TextRotator';
+
 export default function Craftsmanship() {
   return (
     <section className="craftsmanship">
@@ -32,7 +34,7 @@ export default function Craftsmanship() {
       <div className="craft-text">
         <span className="section-label reveal">How We Work</span>
         <h2 className="reveal">
-          From your <em>vision</em> to a finished piece — crafted by hand, guided by heart
+          From your <TextRotator words={['vision', 'dream', 'idea']} color="var(--desert-gold)" /> to a finished piece — crafted by hand, guided by heart
         </h2>
 
         <div className="craft-process">

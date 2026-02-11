@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import { useCanvasAnimation } from './useCanvasAnimation';
+import TextRotator from './TextRotator';
 
 export default function CTA() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -27,7 +28,7 @@ export default function CTA() {
 
       <div className="cta-content reveal">
         <h2>
-          Ready to create a space your family will <em>cherish</em>?
+          Ready to create a space your family will <TextRotator words={['cherish', 'love', 'remember']} color="var(--desert-gold)" />?
         </h2>
         <p>
           Whether you have a clear vision or just a spark of an idea — we&apos;d love to bring it to

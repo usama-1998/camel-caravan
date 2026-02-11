@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import TextRotator from './TextRotator';
 
 /* ──────────────────────────────────
    Types
@@ -391,7 +392,7 @@ export default function Hero() {
         <h1>
           Spaces that bring
           <br />
-          families <em>closer</em>
+          families <TextRotator words={['closer', 'together', 'warm', 'alive']} color="var(--desert-gold)" />
         </h1>
         <p className="hero-subtitle">
           Traditional craftsmanship meets purposeful design — handcrafted furnishings that nurture

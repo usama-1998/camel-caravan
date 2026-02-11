@@ -22,12 +22,14 @@ const testimonials = [
   },
 ];
 
+import TextRotator from './TextRotator';
+
 export default function Testimonials() {
   return (
     <section className="testimonials">
       <div className="testimonials-header reveal">
         <h2>
-          Words from our <em>family</em>
+          Words from our <TextRotator words={['family', 'community', 'clients']} color="var(--caravan-brown)" />
         </h2>
       </div>
 

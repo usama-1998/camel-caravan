@@ -49,12 +49,14 @@ const polaroids = [
   },
 ];
 
+import TextRotator from './TextRotator';
+
 export default function Instagram() {
   return (
     <section className="instagram-section">
       <div className="instagram-header reveal">
         <span className="section-label">@camelcaravanco</span>
-        <h2>Follow Our Journey</h2>
+        <h2>Follow Our <TextRotator words={['Journey', 'Stories', 'Caravan']} color="var(--desert-gold)" /></h2>
       </div>
 
       <div className="polaroid-strip">
