@@ -39,7 +39,7 @@ export default function Testimonials() {
     <section className="testimonials" id="testimonials">
       <div className="testimonials-header reveal">
         <h2>
-          Words from our family
+          Words from our <em>family</em>
         </h2>
       </div>
 

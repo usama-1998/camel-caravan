@@ -55,7 +55,7 @@ nav {
 nav.scrolled {
   background: rgba(253, 248, 240, 0.92);
   backdrop-filter: blur(20px);
-  box-shadow: 0 1px 30px rgba(92, 61, 46, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   padding: 0.8rem 3rem;
 }
 
@@ -3222,7 +3222,7 @@ button.btn-secondary {
 .crescent-top-left {
   position: absolute;
   top: -60px;
-  left: -80px;
+  left: -180px;
   width: 150px;
   height: 150px;
   border-radius: 50%;

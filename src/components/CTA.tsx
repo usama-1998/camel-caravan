@@ -26,7 +26,7 @@ export default function CTA() {
 
       <div className="cta-content reveal">
         <h2>
-          Ready to create a space your family will cherish?
+          Ready to create a space your <em>family</em> will <em>cherish</em>?
         </h2>
         <p>
           Whether you have a clear vision or just a spark of an idea — we&apos;d love to bring it to

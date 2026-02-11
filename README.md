@@ -33,6 +33,8 @@ A premium landing page for **Camel Caravan**, a brand offering handcrafted furni
 - **Minimized Animations** — Timeline nodes have subtle glow only; crescent moon is static.
 - **Mobile Menu** — Full-screen overlay menu with hamburger toggle for seamless mobile navigation.
 - **Visual Consistency** — Crescent moon element added to "How We Work" section (natural orientation) for thematic continuity.
+- **Text Emphasis** — Key brand words italicized in gold serif for narrative depth.
+- **Enhanced UI** — Deeper shadow on sticky navbar for better content separation.
 - **Explore Collection** — Hero button scrolls smoothly to the products section.
 - **Philosophy Simplified** — Clean text-focused layout without counters or value badges.
 

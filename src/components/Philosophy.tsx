@@ -42,7 +42,7 @@ export default function Philosophy() {
         <div className="philosophy-text reveal">
           <span className="section-label">Our Philosophy</span>
           <h2>
-            We believe the <em style={{ fontFamily: "'Cormorant Garamond', serif", color: 'var(--desert-gold)' }}>heart of every home</em> is where family gathers
+            We believe the <em style={{ fontFamily: "'Cormorant Garamond', serif", color: 'var(--desert-gold)' }}>heart of every home</em> is where <em>family</em> gathers
           </h2>
           <p>
             Every piece we create carries the warmth of tradition and the intention of togetherness.
