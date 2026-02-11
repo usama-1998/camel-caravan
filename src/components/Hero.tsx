@@ -390,7 +390,7 @@ export default function Hero() {
 
       <div className="hero-content">
         <div className="hero-arabic">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
-        <div className="hero-tagline">Through the Desert, to Your Home</div>
+
         <h1>
           Spaces that bring
           <br />

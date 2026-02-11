@@ -5,7 +5,7 @@ import { MessageCircle, Phone, Video, X, PhoneCall } from 'lucide-react';
 
 export default function ContactWidget() {
     const [isOpen, setIsOpen] = useState(false);
-    const [isCallOpen, setIsCallOpen] = useState(false);
+
     const [isMounted, setIsMounted] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
     const [isMessageVisible, setIsMessageVisible] = useState(false);
@@ -18,7 +18,7 @@ export default function ContactWidget() {
     useEffect(() => {
         setIsMounted(true);
         const timer = setTimeout(() => {
-            if (!hasOpened.current) {
+            if (!hasOpened.current && window.innerWidth > 768) {
                 setIsOpen(true);
                 hasOpened.current = true;
             }
@@ -27,7 +27,7 @@ export default function ContactWidget() {
         const handleClickOutside = (event: MouseEvent) => {
             if (widgetRef.current && !widgetRef.current.contains(event.target as Node)) {
                 setIsOpen(false);
-                setIsCallOpen(false);
+                setIsOpen(false);
             }
         };
 
@@ -53,13 +53,10 @@ export default function ContactWidget() {
 
     const handleWhatsAppClick = () => {
         setIsOpen(!isOpen);
-        if (isCallOpen) setIsCallOpen(false);
+        setIsOpen(!isOpen);
     };
 
-    const handleCallClick = () => {
-        setIsCallOpen(!isCallOpen);
-        if (isOpen) setIsOpen(false);
-    };
+
 
     const handleStartChat = () => {
         window.open(`https://wa.me/${PHONE_NUMBER}`, '_blank');
@@ -116,32 +113,9 @@ export default function ContactWidget() {
                 </div>
             </div>
 
-            {/* Call Options Popup */}
-            <div className={`contact-widget-call-popup ${isCallOpen ? 'contact-widget-call-popup--open' : ''}`}>
-                <a href={`tel:${PHONE_NUMBER}`} className="contact-widget-call-option">
-                    <div className="contact-widget-call-icon contact-widget-call-icon--phone">
-                        <Phone size={16} />
-                    </div>
-                    <span>Voice Call</span>
-                </a>
-                <a href={`facetime:${PHONE_NUMBER}`} className="contact-widget-call-option">
-                    <div className="contact-widget-call-icon contact-widget-call-icon--facetime">
-                        <Video size={16} />
-                    </div>
-                    <span>FaceTime</span>
-                </a>
-            </div>
 
-            {/* Main Buttons */}
+
             <div className="contact-widget-buttons">
-                <button
-                    onClick={handleCallClick}
-                    className={`contact-widget-btn-call ${isCallOpen ? 'contact-widget-btn-call--active' : ''}`}
-                    aria-label="Call Options"
-                >
-                    {isCallOpen ? <X size={20} /> : <PhoneCall size={20} />}
-                </button>
-
                 <button
                     onClick={handleWhatsAppClick}
                     className="contact-widget-btn-whatsapp"
@@ -155,6 +129,6 @@ export default function ContactWidget() {
                     </div>
                 </button>
             </div>
-        </div>
+        </div >
     );
 }
