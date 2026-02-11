@@ -1,22 +1,22 @@
 import Link from 'next/link';
-import { MajlisSVG, MashrabiyaSVG, MihrabSVG, ManziliyaSVG, MazidahSVG } from './ProductSVGs';
+import Image from 'next/image';
 
 const products = [
   {
-    title: 'Majlis Sofa',
+    title: 'Majlis',
     desc: 'Floor seating that brings the family together — customizable fabric, measurement, and structure.',
     price: 'From SGD 860',
     stamp: 'Hand\nMade',
     href: 'https://camelcaravan.co/majlis/',
-    Illustration: MajlisSVG,
+    image: '/images/products/majlis.png',
   },
   {
-    title: 'Mashrabiya Panels',
+    title: 'Mashrabiya',
     desc: 'Islamic-inspired geometric screens — sliding panels, wall features, partitions, and lightboxes.',
     price: 'From SGD 420',
     stamp: 'Custom',
     href: 'https://camelcaravan.co/mashrabiya/',
-    Illustration: MashrabiyaSVG,
+    image: '/images/products/mashrabiya.png',
   },
   {
     title: 'Mihrab',
@@ -24,7 +24,7 @@ const products = [
     price: 'From SGD 249',
     stamp: '✦',
     href: 'https://camelcaravan.co/mihrab/',
-    Illustration: MihrabSVG,
+    image: '/images/products/mihrab.png',
   },
   {
     title: 'Manziliya',
@@ -32,7 +32,7 @@ const products = [
     price: 'From SGD 38',
     stamp: null,
     href: 'https://camelcaravan.co/manziliya/',
-    Illustration: ManziliyaSVG,
+    image: '/images/products/manziliya.png',
   },
   {
     title: 'Mazidah',
@@ -40,7 +40,7 @@ const products = [
     price: 'Custom Quote',
     stamp: null,
     href: 'https://camelcaravan.co/mazidah/',
-    Illustration: MazidahSVG,
+    image: '/images/products/mazidah.png',
   },
 ];
 
@@ -63,7 +63,12 @@ export default function Products() {
             style={{ textDecoration: 'none' }}
           >
             <div className="product-image">
-              <product.Illustration />
+              <Image
+                src={product.image}
+                alt={product.title}
+                fill
+                style={{ objectFit: 'cover' }}
+              />
               {product.stamp && (
                 <div className="product-stamp" style={{ whiteSpace: 'pre-line' }}>
                   {product.stamp}

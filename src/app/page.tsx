@@ -7,7 +7,6 @@ import Philosophy from '@/components/Philosophy';
 import Products from '@/components/Products';
 import Craftsmanship from '@/components/Craftsmanship';
 import Testimonials from '@/components/Testimonials';
-import Instagram from '@/components/Instagram';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
 
@@ -19,10 +18,9 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Philosophy />
-      <Products />
       <Craftsmanship />
+      <Products />
       <Testimonials />
-      <Instagram />
       <CTA />
       <Footer />
     </>
