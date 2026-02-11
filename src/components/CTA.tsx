@@ -1,36 +1,26 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
+import { useCanvasAnimation } from './useCanvasAnimation';
 
 export default function CTA() {
-  const starsRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useEffect(() => {
-    const container = starsRef.current;
-    if (!container) return;
-
-    for (let i = 0; i < 80; i++) {
-      const s = document.createElement('div');
-      s.className = 'star';
-      s.style.left = `${Math.random() * 100}%`;
-      s.style.top = `${Math.random() * 100}%`;
-      const size = `${1 + Math.random() * 2}px`;
-      s.style.width = size;
-      s.style.height = size;
-      s.style.animationDuration = `${1.5 + Math.random() * 3}s`;
-      s.style.animationDelay = `${Math.random() * 3}s`;
-      container.appendChild(s);
-    }
-
-    return () => {
-      container.innerHTML = '';
-    };
-  }, []);
+  useCanvasAnimation(canvasRef, {
+    particleCount: 40,
+    baseAlpha: 0.1,
+    glowAlpha: 0.5,
+    glowRadius: 180,
+    starColor: '198,153,62' // Gold
+  });
 
   return (
     <section className="cta-section">
-      <div className="stars" ref={starsRef} />
-      <div className="crescent" />
+      <canvas ref={canvasRef} className="cta-canvas" />
+
+      {/* Remove old decorative elements as they are now in canvas or not needed */}
+      {/* <div className="stars" ref={starsRef} /> */}
+      {/* <div className="crescent" /> */}
 
       <div className="cta-content reveal">
         <h2>

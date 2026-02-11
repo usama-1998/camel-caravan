@@ -8,7 +8,7 @@ A premium landing page for **Camel Caravan**, a brand offering handcrafted furni
 - **Autonomous Glow Animation** — A virtual cursor traces a smooth Lissajous path across the pattern, illuminating nearby geometry automatically on page load.
 - **Mouse-Reactive Interactivity** — Move your cursor across the hero to see the pattern glow and shift with multi-layer parallax. Seamless blend between autonomous and real-mouse glow.
 - **Adaptive Navigation** — Light cream-colored nav over the dark hero, smoothly transitioning to a frosted light background on scroll.
-- **Canvas-Based Rendering** — Two layers of geometric patterns rendered at different scales with parallax depth, floating golden particles, and cinematic vignette.
+- **Canvas-Based Rendering** — Two layers of geometric patterns rendered at different scales with parallax depth, floating golden particles, and cinematic vignette. **Now featured in both Hero and CTA sections.**
 - **Responsive Design** — Fully responsive across desktop and mobile viewports, with touch support for mobile interaction.
 
 ## Tech Stack
@@ -38,5 +38,5 @@ Open [http://localhost:3000](http://localhost:3000) to view.
 | **Craftsmanship** | Process and artistry details |
 | **Testimonials** | Customer stories |
 | **Instagram** | Social media gallery |
-| **CTA** | Call-to-action |
+| **CTA** | Interactive canvas background with geometric particles |
 | **Footer** | Navigation and contact |
