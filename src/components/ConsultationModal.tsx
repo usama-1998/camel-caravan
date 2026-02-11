@@ -65,11 +65,9 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                     <>
                         {/* Step 1: Overview */}
                         <div className="modal-header">
-                            <span className="modal-label">✦ Begin Your Journey</span>
+
                             <h2>Let&apos;s Create Something <em>Beautiful</em></h2>
-                            <p className="modal-subtitle">
-                                Every masterpiece starts with a conversation. Tell us your vision and we&apos;ll bring it to life.
-                            </p>
+
                         </div>
 
                         <div className="modal-services">
